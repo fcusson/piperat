@@ -1,0 +1,8 @@
+# bandit.yaml
+
+exclude_dirs:
+  - tests
+  - scripts
+  - docs
+  - .aws-sam
+  - .venv

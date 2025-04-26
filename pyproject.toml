@@ -1,0 +1,68 @@
+[project]
+name = "piperat"
+version = "0.1.0"
+description = "Piperat 🐀 — Your pipelines' tiny guardian!"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+keywords = []
+authors = [
+    { name = "Felix Cusson", email = "felixcusson@gmail.com" },
+]
+maintainers = [
+    { name = "Felix Cusson", email = "felixcusson@gmail.com" },
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pylint", "radon", "ruff", "bandit", "coverage", "mypy"]
+
+[project.urls]
+"Homepage" = "https://github.com/fcusson/piperat"
+"Bug Reports" = "https://github.com/fcusson/piperat/issues"
+"Source" = "https://github.com/fcusson/piperat"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "./src/" }
+
+[tool.mypy]
+python_version = 3.13
+strict = true
+ignore_missing_imports = true
+show_error_codes = true
+pretty = true
+exclude = [ "test/" ]
+disallow_untyped_calls = false
+
+
+[tool.ruff]
+line-length = 80
+target-version = "py313"
+fix = true
+exclude = ["test/", "scripts/"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "TCH", "TID", "B", "C4", "N", "SIM", "ARG", "D"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.ruff.mccabe]
+max-complexity = 10
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
+[tool.ruff.per-file-ignores]
+"**/__init__.py" = ["D104"]
+
+[tool.ruff.isort]
+combine-as-imports = true
+force-sort-within-sections = true
+
