@@ -23,7 +23,3 @@ class BitbucketCloudProvider(PipelineProvider):
 
     def foo(self) -> None:
         """Dummy implementation."""
-
-
-if __name__ == "__main__":
-    username = "felix.cusson@brother.ca"
