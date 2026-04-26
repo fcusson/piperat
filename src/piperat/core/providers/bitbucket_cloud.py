@@ -4,9 +4,12 @@ Classes:
     BitbucketProvider
 """
 
+from itertools import islice
+
 from atlassian.bitbucket.cloud import Cloud
 
-from piperat.providers.base import PipelineProvider
+from piperat.core.pipeline import Pipeline
+from piperat.core.providers.base import PipelineProvider
 
 
 class BitbucketCloudProvider(PipelineProvider):
@@ -21,5 +24,21 @@ class BitbucketCloudProvider(PipelineProvider):
 
         self._client.repositories.get("brotherca-ai", "aws-utils")
 
-    def foo(self) -> None:
-        """Dummy implementation."""
+    def get_pipelines(self, project, count: int) -> list[Pipeline]:
+        """Provides a list of available pipelines for a project."""
+
+        pipelines = self._client.repositories.get(
+            "brotherca-ai", "aws-utils"
+        ).pipelines.each(sort="-created_on", q="pagelen=10")
+
+        pipelines = list(islice(pipelines, 10))
+
+        return []
+
+
+if __name__ == "__main__":
+    username = "fcusson"
+    password = "REDACTED"
+
+    provider = BitbucketCloudProvider(username, password)
+    provider.get_pipelines()
